@@ -1,5 +1,4 @@
-const API_URL =
-  "https://script.google.com/macros/s/AKfycbwAhJ2al41_IdYT9CdmGi6PUA4TGE8AlQ0mNeUY6Ix0cZnJRa7XQRlIm-ff85xAY7Id/exec?mode=latest";
+const API_URL = "/api/latest";
 
 const POLLING_MS = 2000;
 const MAX_POINTS = 120;
