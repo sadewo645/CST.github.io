@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CST SCADA Monitoring</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="bg-glow bg-glow-left"></div>
+    <div class="bg-glow bg-glow-right"></div>
+    <div class="bg-grid"></div>
+
+    <main class="dashboard">
+      <header class="topbar scada-card">
+        <div class="topbar-title">
+          <span class="chip">✦ SCADA Industrial UI</span>
+          <h1>
+            CST <span class="gradient-text">SCADA Monitoring</span>
+          </h1>
+          <p>Realtime separator tank telemetry</p>
+        </div>
+        <div class="connection-wrap">
+          <div class="connection-line">
+            <span id="connectionDot" class="status-dot disconnected"></span>
+            <span id="connectionText">Disconnected</span>
+            <span id="staleBadge" class="stale-badge hidden">STALE</span>
+          </div>
+          <small id="lastUpdateText">Last update: No Data</small>
+        </div>
+      </header>
+
+      <section class="main-grid">
+        <article class="scada-card">
+          <h2>CST LEVEL GAUGE</h2>
+          <div class="tank-shell">
+            <svg id="tankSvg" viewBox="0 0 360 560" aria-label="Tank level gauge">
+              <defs>
+                <clipPath id="tankClip">
+                  <path
+                    d="M108 78
+                       A72 24 0 0 1 252 78
+                       L252 390
+                       L205 498
+                       L155 498
+                       L108 390 Z"
+                  />
+                </clipPath>
+              </defs>
+
+              <g id="scaleGroup" class="scale-group"></g>
+
+              <g clip-path="url(#tankClip)">
+                <rect x="108" y="78" width="144" height="420" class="tank-bg" />
+                <rect id="slugeLayer" x="108" y="498" width="144" height="0" class="fluid sluge" />
+                <rect id="airLayer" x="108" y="498" width="144" height="0" class="fluid air" />
+                <rect id="minyakLayer" x="108" y="498" width="144" height="0" class="fluid minyak" />
+              </g>
+
+              <path
+                class="tank-outline"
+                d="M108 78
+                   A72 24 0 0 1 252 78
+                   L252 390
+                   L205 498
+                   L155 498
+                   L108 390 Z"
+              />
+
+              <text id="labelSluge" class="layer-label" x="128" y="480">Sluge</text>
+              <text id="labelAir" class="layer-label" x="145" y="480">Air</text>
+              <text id="labelMinyak" class="layer-label" x="128" y="480">Minyak</text>
+            </svg>
+          </div>
+        </article>
+
+        <article class="scada-card">
+          <h2>PROCESS KPIs</h2>
+
+          <div class="alarm-row">
+            <div id="alarmTemp" class="alarm-chip"><span class="alarm-icon">⚠</span> Temp Alarm</div>
+            <div id="alarmPressure" class="alarm-chip"><span class="alarm-icon">⚠</span> Pressure Alarm</div>
+            <div id="alarmOil" class="alarm-chip"><span class="alarm-icon">⚠</span> Oil High Alarm</div>
+          </div>
+
+          <div class="kpi-grid">
+            <div class="kpi-card"><span>Suhu</span><strong id="kpiSuhu">-</strong><em>°C</em></div>
+            <div class="kpi-card"><span>Tekanan Total</span><strong id="kpiTekanan">-</strong><em>bar</em></div>
+            <div class="kpi-card"><span>Ketinggian Total</span><strong id="kpiTotalCm">-</strong><em>cm</em></div>
+            <div class="kpi-card"><span>Ketinggian Minyak</span><strong id="kpiMinyakCm">-</strong><em>cm</em></div>
+            <div class="kpi-card"><span>Ketinggian Air</span><strong id="kpiAirCm">-</strong><em>cm</em></div>
+            <div class="kpi-card"><span>Ketinggian Sluge</span><strong id="kpiSlugeCm">-</strong><em>cm</em></div>
+            <div class="kpi-card"><span>Volume Minyak</span><strong id="kpiVolMinyak">-</strong><em>m³</em></div>
+            <div class="kpi-card"><span>Volume Air</span><strong id="kpiVolAir">-</strong><em>m³</em></div>
+            <div class="kpi-card"><span>Volume Sluge</span><strong id="kpiVolSluge">-</strong><em>m³</em></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="chart-grid">
+        <article class="scada-card chart-card">
+          <h2>SUHU VS WAKTU</h2>
+          <canvas id="tempChart"></canvas>
+        </article>
+        <article class="scada-card chart-card">
+          <h2>VOLUME MINYAK VS WAKTU</h2>
+          <canvas id="oilVolChart"></canvas>
+        </article>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
