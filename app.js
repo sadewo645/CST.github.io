@@ -364,6 +364,5 @@ setConnection(false, null, false);
 
 setStaleState(false);
 
-refreshData();
-
-setInterval(refreshData, POLLING_MS);
+setConnection(false, null, false);
+setStaleState(false);
