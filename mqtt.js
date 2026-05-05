@@ -1,5 +1,5 @@
 const client = mqtt.connect(
-  "wss://1a060a8841ae4b9cb2b9224e17e87cce.s1.eu.hivemq.cloud:8884/mqtt",
+  "wss://65740a8802bf4a778f388ff5c1a23dd2.s1.eu.hivemq.cloud:8884/mqtt",
   {
     username: "CstTest123",
     password: "ZY@SKrww3fCzM@e",
